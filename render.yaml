@@ -1,0 +1,31 @@
+services:
+  # 1. Configuración del Backend (Web Service)
+  - type: web
+    name: mi-backend-acs
+    env: node
+    region: ohio # o la región de tu preferencia
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      # Si usas base de datos externa (ej. Supabase o Neon), define aquí la variable:
+      # - key: DATABASE_URL
+      #   sync: false 
+
+  # 2. Configuración del Frontend (Static Site)
+  - type: static
+    name: mi-frontend-acs
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist # Cambiar a './build' si usas React Create App
+    envVars:
+      - key: VITE_API_URL # O REACT_APP_API_URL dependiendo de tu framework
+        fromService:
+          type: web
+          name: mi-backend-acs
+          property: url

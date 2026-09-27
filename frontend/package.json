@@ -1,0 +1,8 @@
+{
+  "name": "frontend-acs",
+  "version": "1.0.0",
+  "description": "Frontend estático para Fase 1 ACS",
+  "scripts": {
+    "build": "echo 'Frontend estático listo para desplegar'"
+  }
+}

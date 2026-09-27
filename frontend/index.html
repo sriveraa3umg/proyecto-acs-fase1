@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Calidad de Software - Fase 1</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 40px; text-align: center; }
+        .container { background: white; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; }
+        .card { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin-top: 20px; text-align: left; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dashboard de Calidad - Proyecto Final</h1>
+        <p>Aplicación Web bajo evaluación integral (Fase 1)</p>
+        
+        <button onclick="consultarAPI()">Probar Conexión con el Backend</button>
+
+        <div class="card">
+            <h3>Resultado de la comunicación API:</h3>
+            <p id="resultado">Haz clic en el botón para verificar el estado del servidor...</p>
+        </div>
+    </div>
+
+    <script>
+        async function consultarAPI() {
+            const resultadoP = document.getElementById('resultado');
+            resultadoP.innerText = "Conectando con el servidor...";
+            
+            try {
+                // En producción con Render, puedes cambiar esta URL por la de tu backend desplegado o usar rutas relativas si están integrados.
+                const respuesta = await fetch('https://mi-backend-acs.onrender.com/api/saludo');
+                const datos = await respuesta.json();
+                resultadoP.innerText = JSON.stringify(datos, null, 2);
+            } catch (error) {
+                resultadoP.innerText = "Error al conectar con el backend: " + error.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
