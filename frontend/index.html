@@ -2,46 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación de Calidad de Software - Fase 1</title>
+    <title>Proyecto Fase 1 - ACS</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 40px; text-align: center; }
-        .container { background: white; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; }
-        .card { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin-top: 20px; text-align: left; }
-        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 15px; }
-        button:hover { background: #2980b9; }
+        body { font-family: Calibri, sans-serif; margin: 40px; background-color: #f8fafc; color: #0f172a; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #1d4ed8; }
+        pre { background: #1e293b; color: #f8fafc; padding: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h1>Dashboard de Control - Fase 1</h1>
+        <p>Estudiante: Sergio Iván Rivera Aguirre (Carné: 0900-20-21647)[cite: 10]</p>
+        <button onclick="probarConexion()">Probar Conexión con el Backend (CU-01)</button>
+        <button onclick="cargarItems()">Consultar Catálogo (CU-02)</button>
+        <button onclick="probarRutaInexistente()">Simular Error 404 (CU-07)</button>
+    </div>
 
-    <div class="container">
-        <h1>Dashboard de Calidad - Proyecto Final</h1>
-        <p>Aplicación Web bajo evaluación integral (Fase 1)</p>
-        
-        <button onclick="consultarAPI()">Probar Conexión con el Backend</button>
-
-        <div class="card">
-            <h3>Resultado de la comunicación API:</h3>
-            <p id="resultado">Haz clic en el botón para verificar el estado del servidor...</p>
-        </div>
+    <div class="card">
+        <h3>Resultado de la Ejecución:</h3>
+        <pre id="resultado">Esperando acción de prueba...</pre>
     </div>
 
     <script>
-        async function consultarAPI() {
-            const resultadoP = document.getElementById('resultado');
-            resultadoP.innerText = "Conectando con el servidor...";
-            
+        const API_URL = ""; // Si estás en local usa http://localhost:5000 o tu URL de Render
+
+        async function probarConexion() {
             try {
-                // En producción con Render, puedes cambiar esta URL por la de tu backend desplegado o usar rutas relativas si están integrados.
-                const respuesta = await fetch('https://mi-backend-acs.onrender.com/api/saludo');
-                const datos = await respuesta.json();
-                resultadoP.innerText = JSON.stringify(datos, null, 2);
+                let res = await fetch(`${API_URL}/api/saludo`);
+                let data = await res.json();
+                document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
             } catch (error) {
-                resultadoP.innerText = "Error al conectar con el backend: " + error.message;
+                document.getElementById('resultado').innerText = "Error de conexión: " + error.message;
+            }
+        }
+
+        async function cargarItems() {
+            try {
+                let res = await fetch(`${API_URL}/api/items`);
+                let data = await res.json();
+                document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('resultado').innerText = "Error al cargar ítems: " + error.message;
+            }
+        }
+
+        async function probarRutaInexistente() {
+            try {
+                let res = await fetch(`${API_URL}/api/recurso-falso-que-falla`);
+                let data = await res.json();
+                document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('resultado').innerText = "Error controlado: " + error.message;
             }
         }
     </script>
-
 </body>
 </html>
