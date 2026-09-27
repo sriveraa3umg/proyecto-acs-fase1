@@ -25,11 +25,12 @@ app.get('/api/items', (req, res) => {
     res.json(items);
 });
 
-// Manejo de rutas inexistentes (Relacionado con CU-07 y CP-12)[cite: 10]
+// Manejo de rutas inexistentes (Devuelve JSON 404 en lugar de HTML)
 app.use((req, res) => {
     res.status(404).json({
         error: "Ruta no encontrada",
-        codigo: 404
+        codigo: 404,
+        mensaje: "El recurso solicitado no existe en el servidor"
     });
 });
 
