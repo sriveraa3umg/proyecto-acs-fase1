@@ -14,16 +14,10 @@ services:
       - key: PORT
         value: 5000
 
-  # 2. Configuración del Frontend (Static Site corregido)
+  # 2. Configuración del Frontend (Static Site simplificado)
   - type: web
     name: mi-frontend-acs
     runtime: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: mi-backend-acs
-          property: url
+    buildCommand: echo "No build required"
+    staticPublishPath: .
