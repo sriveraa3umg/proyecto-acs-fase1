@@ -1,31 +1,40 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Habilitar CORS y recepción de JSON
 app.use(cors());
 app.use(express.json());
 
-// Ruta de prueba (Endpoint principal del API)
+// Endpoint de prueba de conectividad (Relacionado con CU-01 y CP-03)
 app.get('/api/saludo', (req, res) => {
-  res.json({
-    estado: "success",
-    mensaje: "¡Conexión exitosa entre el Frontend y el Backend en la nube!",
-    proyecto: "Aseguramiento de la Calidad de Software - Fase 1"
-  });
+    res.json({
+        estado: "success",
+        mensaje: "Conexión exitosa con el backend en la nube",
+        proyecto: "Fase 1 - Aseguramiento de Calidad"
+    });
 });
 
-// Ruta de ejemplo para simular lógica de negocio (Gestión de inventario / items)
+// Endpoint de consulta de inventario/ítems (Relacionado con CU-02 y CP-05)
 app.get('/api/items', (req, res) => {
-  res.json([
-    { id: 1, nombre: "Producto A - Módulo Crítico", stock: 45, estado: "Activo" },
-    { id: 2, nombre: "Producto B - Componente Web", stock: 12, estado: "Bajo Stock" },
-    { id: 3, nombre: "Producto C - Base de Datos", stock: 100, estado: "Activo" }
-  ]);
+    const items = [
+        { id: 1, nombre: "Servidor Cloud Node.js", stock: 15, estado: "Operativo" },
+        { id: 2, nombre: "Módulo Frontend Estático", stock: 30, estado: "Operativo" },
+        { id: 3, nombre: "Base de Datos Mock", stock: 10, estado: "Mantenimiento" }
+    ];
+    res.json(items);
+});
+
+// Manejo de rutas inexistentes (Relacionado con CU-07 y CP-12)[cite: 10]
+app.use((req, res) => {
+    res.status(404).json({
+        error: "Ruta no encontrada",
+        codigo: 404
+    });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
+module.exports = app;
