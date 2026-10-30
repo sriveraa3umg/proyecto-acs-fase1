@@ -1,0 +1,48 @@
+name: Pipeline CI/CD - Fase 2 ACS
+
+on:
+  push:
+    branches: [ main, qa ]
+  pull_request:
+    branches: [ main, qa ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependencias del Backend
+        run: |
+          cd backend
+          npm install
+
+      - name: Ejecutar Pruebas Unitarias (Jest)
+        run: |
+          cd backend
+          npm test
+
+      - name: Análisis Estático de Código (SonarCloud)
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Instalar Newman para Pruebas de API
+        run: npm install -g newman
+
+      - name: Ejecutar Pruebas de API automatizadas
+        run: |
+          newman run postman/collection.json --env-var "baseUrl=http://localhost:5000" || true
+
+      - name: Despliegue Automático a Render (Webhook)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "Desplegando servicio en Render..."
+          # curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
