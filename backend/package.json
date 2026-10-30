@@ -1,13 +1,17 @@
 {
   "name": "backend-acs",
   "version": "1.0.0",
-  "description": "Backend de prueba para Fase 1 ACS",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^6.3.0"
   }
 }
