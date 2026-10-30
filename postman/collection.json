@@ -1,0 +1,62 @@
+{
+  "info": {
+    "name": "ACS - Fase 2 API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test Saludo API",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Response has success state\", function () { var jsonData = pm.response.json(); pm.expect(jsonData.estado).to.eql(\"success\"); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/saludo", "host": ["{{baseUrl}}"], "path": ["api", "saludo"] }
+      }
+    },
+    {
+      "name": "Test Items Inventario",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Items is array\", function () { var jsonData = pm.response.json(); pm.expect(jsonData).to.be.an('array'); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/items", "host": ["{{baseUrl}}"], "path": ["api", "items"] }
+      }
+    },
+    {
+      "name": "Test Error 404",
+      "event": [
+        {
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
+              "pm.test(\"Error schema valid\", function () { var jsonData = pm.response.json(); pm.expect(jsonData.codigo).to.eql(404); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/no-existe", "host": ["{{baseUrl}}"], "path": ["api", "no-existe"] }
+      }
+    }
+  ]
+}
