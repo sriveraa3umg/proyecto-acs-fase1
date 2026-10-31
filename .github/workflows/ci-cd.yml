@@ -48,4 +48,4 @@ jobs:
 
       - name: Ejecutar Pruebas de API automatizadas
         run: |
-          newman run postman/collection.json --env-var "baseUrl=http://localhost:5000" || true
+          newman run postman/collection.json --env-var "baseUrl=https://proyecto-acs-fase1.onrender.com"
