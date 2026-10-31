@@ -23,9 +23,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/saludo",
+          "raw": "{{baseUrl}}/api/saludo",
           "host": ["{{baseUrl}}"],
-          "path": ["saludo"]
+          "path": ["api", "saludo"]
         }
       }
     },
@@ -48,9 +48,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/items",
+          "raw": "{{baseUrl}}/api/items",
           "host": ["{{baseUrl}}"],
-          "path": ["items"]
+          "path": ["api", "items"]
         }
       }
     },
@@ -73,9 +73,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/no-existe",
+          "raw": "{{baseUrl}}/api/no-existe",
           "host": ["{{baseUrl}}"],
-          "path": ["no-existe"]
+          "path": ["api", "no-existe"]
         }
       }
     }
