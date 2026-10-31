@@ -19,7 +19,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/saludo", "host": ["{{baseUrl}}"], "path": ["api", "saludo"] }
+        "url": { "raw": "{{baseUrl}}/saludo", "host": ["{{baseUrl}}"], "path": ["saludo"] }
       }
     },
     {
@@ -37,7 +37,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/items", "host": ["{{baseUrl}}"], "path": ["api", "items"] }
+        "url": { "raw": "{{baseUrl}}/items", "host": ["{{baseUrl}}"], "path": ["items"] }
       }
     },
     {
@@ -55,7 +55,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/api/no-existe", "host": ["{{baseUrl}}"], "path": ["api", "no-existe"] }
+        "url": { "raw": "{{baseUrl}}/no-existe", "host": ["{{baseUrl}}"], "path": ["no-existe"] }
       }
     }
   ]
