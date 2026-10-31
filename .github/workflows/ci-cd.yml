@@ -48,4 +48,4 @@ jobs:
 
       - name: Ejecutar Pruebas de API automatizadas
         run: |
-          newman run postman/collection.json --env-var "baseUrl=https://proyecto-acs-fase1.onrender.com"
+          newman run postman/collection.json --env-var "baseUrl=https://mi-backend-acs.onrender.com"
