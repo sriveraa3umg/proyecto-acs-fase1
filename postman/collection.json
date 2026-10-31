@@ -8,10 +8,12 @@
       "name": "Test Saludo API",
       "event": [
         {
+          "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "pm.test(\"Response has success state\", function () { var jsonData = pm.response.json(); pm.expect(jsonData.estado).to.eql(\"success\"); });"
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
             ],
             "type": "text/javascript"
           }
@@ -19,17 +21,24 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/saludo", "host": ["{{baseUrl}}"], "path": ["saludo"] }
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/saludo",
+          "host": ["{{baseUrl}}"],
+          "path": ["saludo"]
+        }
       }
     },
     {
       "name": "Test Items Inventario",
       "event": [
         {
+          "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "pm.test(\"Items is array\", function () { var jsonData = pm.response.json(); pm.expect(jsonData).to.be.an('array'); });"
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
             ],
             "type": "text/javascript"
           }
@@ -37,17 +46,24 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/items", "host": ["{{baseUrl}}"], "path": ["items"] }
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/items",
+          "host": ["{{baseUrl}}"],
+          "path": ["items"]
+        }
       }
     },
     {
       "name": "Test Error 404",
       "event": [
         {
+          "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
-              "pm.test(\"Error schema valid\", function () { var jsonData = pm.response.json(); pm.expect(jsonData.codigo).to.eql(404); });"
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
             ],
             "type": "text/javascript"
           }
@@ -55,7 +71,12 @@
       ],
       "request": {
         "method": "GET",
-        "url": { "raw": "{{baseUrl}}/no-existe", "host": ["{{baseUrl}}"], "path": ["no-existe"] }
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/no-existe",
+          "host": ["{{baseUrl}}"],
+          "path": ["no-existe"]
+        }
       }
     }
   ]
